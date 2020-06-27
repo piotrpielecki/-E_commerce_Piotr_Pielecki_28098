@@ -1,22 +1,20 @@
+<app-menu></app-menu>
 <div style="display: flex;flex-direction: row;">
-    <app-menu></app-menu>
-    <div class="content" style="width: 100%;">
+    <div class="container">
         <div class="content-header">
             <h2>Products</h2>
         </div>
-        <button (click)="getProducts()">Odśwież</button>
-        <div class="content-container">
-            <table style="margin: 0 auto;">
+        <button (click)="getProducts()" class="btn btn-secondary">Refresh</button>
+        <div class="container">
+          <h2>Add new product</h2>
+            <table style="margin: 0 auto;" class="table">
                 <thead>
                     <tr>
-                        <th colspan="5">
-                            <h2>Dodaj nowy produkt</h2>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>link do obrazka</th>
-                        <th>tytuł</th>
-                        <th>cena</th>
+                        <th>Link to picture</th>
+                        <th>Title</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -24,43 +22,48 @@
                         <td><input type="text" [(ngModel)]="newProduct.thumbnail"></td>
                         <td><input type="text" [(ngModel)]="newProduct.title"></td>
                         <td><input type="number" [(ngModel)]="newProduct.price"></td>
-                        <td><select [(ngModel)]="newProduct.category">
-                          <option value="game">game</option>
-                          <option value="tool">tool</option>
-                        </select>
+                        <td>
+                          <select [(ngModel)]="newProduct.category">
+                            <option value="game" selected>Game</option>
+                            <option value="tool">Tool</option>
+                          </select>
                         </td>
-                        <td><button (click)="this.mainService.addProduct(newProduct)">Dodaj</button></td>
+                        <td>
+                          <button (click)="this.mainService.addProduct(newProduct)" class="btn btn-primary">Add</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="container">
+          <h2>All products in database</h2>
 
-            <table style="margin:0 auto;" id="productsTable">
-                <thead *ngIf="this.mainService.products">
-                    <tr>
-                        <th>obrazek</th>
-                        <th>dane</th>
-                        <th>akcje</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <ng-container *ngFor="let product of this.mainService.products?.productsTable">
-                        <tr style="background-color: whitesmoke;">
-                            <td><img src="{{product.thumbnail}}" alt=""></td>
-                            <td>
-                                <ul>
-                                    <li>Tytuł: {{product.title}}</li>
-                                    <li>Cena: {{product.price}}</li>
-                                    <li>Kategoria: {{product.category}}</li>
-                                </ul>
-                            </td>
-                            <td>
-                                <button (click)="this.mainService.removeProduct(product.id)">Usuń</button>
-                            </td>
-                        </tr>
-                    </ng-container>
-                </tbody>
-            </table>
-
+          <table style="margin:0 auto;" id="productsTable" class="table">
+              <thead *ngIf="this.mainService.products">
+                  <tr>
+                      <th>Logo</th>
+                      <th>Data</th>
+                      <th>Action</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <ng-container *ngFor="let product of this.mainService.products?.productsTable">
+                      <tr style="background-color: whitesmoke;">
+                          <td><img src="{{product.thumbnail}}" alt="Product logo"></td>
+                          <td>
+                              <ul>
+                                  <li>Title: {{product.title}}</li>
+                                  <li>Price: {{product.price}}</li>
+                                  <li>Category: {{product.category}}</li>
+                              </ul>
+                          </td>
+                          <td>
+                              <button (click)="this.mainService.removeProduct(product.id)" class="btn btn-danger">Delete</button>
+                          </td>
+                      </tr>
+                  </ng-container>
+              </tbody>
+          </table>
         </div>
     </div>
 </div>

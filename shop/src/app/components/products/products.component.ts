@@ -20,4 +20,11 @@ export class ProductsComponent implements OnInit {
     console.log('dodano do koszyka produkt:');
     console.log(product);
   }
+  getCartQuanity() {
+    let quantity = 0;
+    for (const product of this.mainService.cart) {
+      quantity += 1;
+    }
+    return quantity;
+  }
 }

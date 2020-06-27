@@ -22,7 +22,6 @@ export class MainService {
     const s = new Promise((resolve, reject) => {
       const xhttp = new XMLHttpRequest();
       const SQL = ('object=' + encodeURIComponent(JSON.stringify(productsRequest)));
-      console.log(this.apiPath + SQL);
       xhttp.open('GET', this.apiPath + SQL, true);
       xhttp.send();
       xhttp.onreadystatechange = function () {
@@ -49,7 +48,6 @@ export class MainService {
       const xhttp = new XMLHttpRequest();
       let request = { action: 'addProduct', newProduct: newProduct }
       const SQL = ('object=' + encodeURIComponent(JSON.stringify(request)));
-      console.log(this.apiPath + SQL);
       xhttp.open('GET', this.apiPath + SQL, true);
       xhttp.send();
       xhttp.onreadystatechange = function () {
@@ -75,7 +73,6 @@ export class MainService {
       const xhttp = new XMLHttpRequest();
       let request = { action: 'removeProduct', id: id }
       const SQL = ('object=' + encodeURIComponent(JSON.stringify(request)));
-      console.log(this.apiPath + SQL);
       xhttp.open('GET', this.apiPath + SQL, true);
       xhttp.send();
       xhttp.onreadystatechange = function () {
@@ -95,5 +92,34 @@ export class MainService {
     }).catch((onmessage) => {
       console.log('Coś poszło nie tak podczas usuwania produktu!');
     });
+  }
+
+  orders = null;
+
+  getOrders() {
+  const s = new Promise((resolve, reject) => {
+    const xhttp = new XMLHttpRequest();
+    let request = { action: 'getOrders' }
+    const SQL = ('object=' + encodeURIComponent(JSON.stringify(request)));
+    console.log(this.apiPath + SQL);
+    xhttp.open('GET', this.apiPath + SQL, true);
+    xhttp.send();
+    xhttp.onreadystatechange = function () {
+    if (this.readyState === 4 && this.status === 200) {
+      const resultObject = JSON.parse(xhttp.responseText);
+      if (resultObject !== null) {
+        resolve(resultObject);
+      } else {
+        reject('Failed');
+      }
+    }
+    };
+  });
+  s.then((onmessage: any) => {
+    console.log('Pomyślnie pobrano zamówienia!');
+    this.orders = onmessage;
+  }).catch((onmessage) => {
+    console.log('Coś poszło nie tak podczas pobierania zamówień!');
+  });
   }
 }

@@ -1,28 +1,35 @@
 <app-panel-top></app-panel-top>
 
+<div class="container mx-auto text-center" id="wrapper">
+  <div class="container">
+    <h1>Welcome to software shop</h1>
+  </div>
+  <input type="text" [(ngModel)]="this.mainService.productsRequest.name">
+  <button (click)="this.mainService.getProducts(this.mainService.productsRequest)" routerLink="/products" class="btn btn-secondary">Search Products</button>
+</div>
 
 <div class="products">
     <table style="margin:0 auto;" id="productsTable">
         <thead *ngIf="this.mainService.products">
             <tr>
-                <th>obrazek</th>
-                <th>dane</th>
-                <th>akcje</th>
+                <th>Logo</th>
+                <th>Data</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <ng-container *ngFor="let product of this.mainService.products?.productsTable">
                 <tr style="background-color: whitesmoke;">
-                    <td><img src="{{product.thumbnail}}" alt=""></td>
+                    <td><img src="{{product.thumbnail}}" alt="Product logo"></td>
                     <td>
                         <ul>
-                            <li>Tytuł: {{product.title}}</li>
-                            <li>Cena: {{product.price}}</li>
-                            <li>Kategoria: {{product.category}}</li>
+                            <li>Title: {{product.title}}</li>
+                            <li>Price: {{product.price}}</li>
+                            <li>Category: {{product.category}}</li>
                         </ul>
                     </td>
                     <td>
-                        <button (click)="addToCart(product)">Do koszyka</button>
+                        <button (click)="addToCart(product)" class="btn btn-secondary">Add to Cart</button>
                     </td>
                 </tr>
             </ng-container>

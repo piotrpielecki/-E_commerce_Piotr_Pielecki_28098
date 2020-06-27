@@ -1,10 +1,10 @@
 <app-panel-top></app-panel-top>
-<div class="products">
+<div class="products container">
     <table style="margin:0 auto;" id="cartTable">
         <thead *ngIf="this.mainService.products">
             <tr>
-                <th>obrazek</th>
-                <th>dane</th>
+                <th>Logo</th>
+                <th>Data</th>
             </tr>
         </thead>
         <tbody>
@@ -13,9 +13,9 @@
                     <td><img src="{{object.product.thumbnail}}" alt=""></td>
                     <td>
                         <ul>
-                            <li>Tytuł: {{object.product.title}}</li>
-                            <li>Cena: {{object.product.price}}</li>
-                            <li>Kategoria: {{object.product.category}}</li>
+                            <li>Title: {{object.product.title}}</li>
+                            <li>Price: {{object.product.price}}</li>
+                            <li>Category: {{object.product.category}}</li>
                         </ul>
                     </td>
                 </tr>
@@ -23,23 +23,23 @@
         </tbody>
     </table>
     <div class="summary">
-        <p>Do zapłaty: {{getCartPrice()}}</p>
+        <p>Final price: {{getCartPrice()}}</p>
     </div>
     <div class="payment">
         <div id="paypal">
         </div>
         <form action="http://www.jakubadamus.cba.pl/paypal.php" method="get" #paymentForm>
-            <input type="text" #firstName name="firstName" id="" placeholder="Imie">
-            <input type="text" #lastName name="lastName" id="" placeholder="Nazwisko">
+            <input type="text" #firstName name="firstName" id="" placeholder="First Name">
+            <input type="text" #lastName name="lastName" id="" placeholder="Last Name">
             <input type="text" #email name="email" id="" placeholder="Email">
-            <input type="text" name="phone" id="" placeholder="Telefon">
+            <input type="text" name="phone" id="" placeholder="Telephone">
             <ng-container *ngFor="let object of this.mainService.cart">
                 <input type="hidden" name="products[]" value="{{ object | json }}">
             </ng-container>
-            <label for="">Akceptuję regulamin:
+            <label for="">I accept terms of use:
               <input #regulamin type="checkbox" name="aggrement" id="" (change)="0">
             </label>
-            <button [disabled]="!regulamin.checked" (click)="paymentForm.submit()">Kup</button>
+            <button [disabled]="!regulamin.checked" (click)="paymentForm.submit()" class="btn btn-primary">Buy</button>
         </form>
     </div>
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MainService } from 'src/app/services/main.service';
 
 @Component({
   selector: 'app-landing',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingComponent implements OnInit {
 
-  constructor() { }
+  constructor(public mainService: MainService) { }
 
   ngOnInit(): void {
+  }
+  getCartQuanity() {
+    let quantity = 0;
+    for (const product of this.mainService.cart) {
+      quantity += 1;
+    }
+    return quantity;
   }
 
 }
