@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MainService } from 'src/app/services/main.service';
-
 @Component({
   selector: 'app-adm-products',
   templateUrl: './adm-products.component.html',
@@ -15,13 +14,15 @@ export class AdmProductsComponent implements OnInit {
     title: '',
     price: 0,
     category: ''
-    };
-    
+  };
+
   ngOnInit(): void {
     this.getProducts();
   }
-
   getProducts() {
     this.mainService.getProducts(this.mainService.productsRequest);
-    }
+  }
+
+
+
 }

@@ -20,5 +20,6 @@ export class CartComponent implements OnInit {
       price += parseFloat(object.product.price);
     }
     return price;
-    }
+  }
+
 }

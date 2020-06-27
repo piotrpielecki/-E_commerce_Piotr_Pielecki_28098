@@ -15,10 +15,10 @@ import { AdmProductsComponent } from './components/admin/adm-products/adm-produc
 
 const appRoutes: Routes = [
   { path: 'cart', component: CartComponent },
-  { path: 'adm_products', component: AdmProductsComponent},
-  { path: 'adm_dashboard', component: DashboardComponent},
   { path: 'products', component: ProductsComponent },
   { path: 'landing', component: LandingComponent },
+  { path: 'adm_dashboard', component: DashboardComponent },
+  { path: 'adm_products', component: AdmProductsComponent },
   { path: '', redirectTo: '/landing', pathMatch: 'full' }
 ];
 

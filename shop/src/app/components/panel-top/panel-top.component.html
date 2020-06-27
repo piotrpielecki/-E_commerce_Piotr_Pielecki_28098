@@ -1,16 +1,20 @@
-<div>
-    <div style="display: flex;flex-direction: row;">
-        <img src="https://via.placeholder.com/100" alt="">
-        <h2>Sklep z software'em</h2>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/">Sklep z software'em</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" routerLink="/adm_dashboard">Panel Administratora <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" id="cartBtn" routerLink="/cart">Cart: {{getCartQuanity()}}</a>
     </div>
-    <button routerLink="/adm_dashboard">Panel Administratora</button>
-    <div style="display: flex; justify-content: center;">
-        <input type="text" [(ngModel)]="this.mainService.productsRequest.name">
-        <button (click)="this.mainService.getProducts(this.mainService.productsRequest)" routerLink="/products">Szukaj Produktu</button>
-    </div>
-    <div>
-        <button id="cartBtn" routerLink="/cart">
-        {{getCartQuanity()}}
-        </button>
-    </div>
+  </div>
+</nav>
+
+<div class="container mx-auto text-center" id="wrapper">
+  <div class="container">
+    <h1>Witamy w sklepie z oprogramowaniem</h1>
+  </div>
+  <input type="text" [(ngModel)]="this.mainService.productsRequest.name">
+  <button (click)="this.mainService.getProducts(this.mainService.productsRequest)" routerLink="/products">Szukaj Produktu</button>
 </div>
